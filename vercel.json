@@ -1,0 +1,20 @@
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "env": {
+    "GEMINI_API_KEY": {
+      "description": "Your Google Gemini API key",
+      "value": ""
+    },
+    "NEXT_PUBLIC_SUPABASE_URL": {
+      "description": "Your Supabase project URL",
+      "value": ""
+    },
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": {
+      "description": "Your Supabase anonymous key",
+      "value": ""
+    }
+  }
+}
