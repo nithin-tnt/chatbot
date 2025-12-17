@@ -17,20 +17,20 @@ export const AuthForm = ({ loading, onAuth }: AuthFormProps) => {
   };
 
   return (
-    <div className="flex items-center justify-center h-full">
-      <div className="text-center max-w-md w-full px-6">
+    <div className="flex items-center justify-center h-full p-4">
+      <div className="text-center max-w-md w-full px-4 md:px-6">
         <div
-          className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6"
+          className="w-16 h-16 md:w-20 md:h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 md:mb-6"
           style={{
             background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
           }}
         >
-          <RobotOutlined style={{ fontSize: '48px', color: 'white' }} />
+          <RobotOutlined className="text-3xl md:text-5xl" style={{ color: 'white' }} />
         </div>
-        <h1 className="text-3xl font-bold mb-3" style={{ color: '#111827' }}>
+        <h1 className="text-2xl md:text-3xl font-bold mb-2 md:mb-3" style={{ color: '#111827' }}>
           Middleware AI Assistant
         </h1>
-        <p className="text-base mb-8" style={{ color: '#6b7280' }}>
+        <p className="text-sm md:text-base mb-6 md:mb-8" style={{ color: '#6b7280' }}>
           {authMode === 'signin'
             ? 'Sign in to continue your conversations'
             : 'Create an account to get started'}

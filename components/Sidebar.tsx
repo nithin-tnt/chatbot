@@ -16,6 +16,7 @@ interface SidebarProps {
   onDeleteSession: (sessionId: string) => void;
   onOpenProfile: () => void;
   onSignOut: () => void;
+  onCloseSidebar?: () => void;
 }
 
 export const Sidebar = ({
@@ -29,6 +30,7 @@ export const Sidebar = ({
   onDeleteSession,
   onOpenProfile,
   onSignOut,
+  onCloseSidebar,
 }: SidebarProps) => {
   const userMenuItems = [
     {
@@ -46,10 +48,24 @@ export const Sidebar = ({
   ];
 
   return (
-    <div className="w-64 border-r flex flex-col" style={{ 
+    <div className="w-full md:w-64 max-w-sm md:max-w-none h-full border-r flex flex-col" style={{ 
       borderColor: '#e5e7eb',
       background: '#ffffff',
     }}>
+      {/* Mobile Close Button */}
+      <div className="md:hidden flex items-center justify-between p-4 border-b" style={{ borderColor: '#e5e7eb' }}>
+        <h2 className="text-lg font-semibold m-0" style={{ color: '#111827' }}>Chats</h2>
+        <button
+          onClick={onCloseSidebar}
+          className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+          style={{ border: '1px solid #e5e7eb' }}
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
       {/* Sidebar Header */}
       <div className="p-4 border-b" style={{ borderColor: '#e5e7eb' }}>
         <Button

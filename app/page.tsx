@@ -21,6 +21,7 @@ function ChatApp() {
   
   const [isLoadingMessages, setIsLoadingMessages] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [totalUsage, setTotalUsage] = useState<TokenUsage>({ 
     promptTokens: 0, 
@@ -204,19 +205,48 @@ function ChatApp() {
   }
 
   return (
-    <div className="h-screen flex" style={{ background: '#f9fafb' }}>
-      <Sidebar
-        chatSessions={chatSessions}
-        currentSession={currentSession}
-        userProfile={userProfile}
-        userEmail={user.email}
-        loading={loading}
-        onNewChat={handleNewChat}
-        onSelectSession={handleSelectSession}
-        onDeleteSession={handleDeleteSession}
-        onOpenProfile={() => setShowProfile(true)}
-        onSignOut={handleSignOut}
-      />
+    <div className="h-screen flex flex-col md:flex-row overflow-hidden" style={{ background: '#f9fafb' }}>
+      {/* Mobile Header */}
+      <div className="md:hidden flex items-center justify-between px-4 py-3 border-b" style={{ borderColor: '#e5e7eb', background: '#ffffff' }}>
+        <h1 className="text-lg font-semibold" style={{ color: '#111827' }}>Middleware AI</h1>
+        <button
+          onClick={() => setShowSidebar(!showSidebar)}
+          className="p-2 rounded-lg"
+          style={{ background: '#f9fafb', border: '1px solid #e5e7eb' }}
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M3 12h18M3 6h18M3 18h18" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Sidebar - toggleable on mobile */}
+      <div className={`${showSidebar ? 'flex' : 'hidden'} md:flex fixed md:relative z-50 md:z-auto inset-0 md:inset-auto h-full`}>
+        {/* Overlay for mobile */}
+        <div
+          className="md:hidden fixed inset-0 bg-black transition-opacity duration-300"
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+          onClick={() => setShowSidebar(false)}
+        />
+        <div className="relative h-full z-10">
+          <Sidebar
+            chatSessions={chatSessions}
+            currentSession={currentSession}
+            userProfile={userProfile}
+            userEmail={user.email}
+            loading={loading}
+            onNewChat={handleNewChat}
+            onSelectSession={(session) => {
+              handleSelectSession(session);
+              setShowSidebar(false); // Close sidebar on mobile after selection
+            }}
+            onDeleteSession={handleDeleteSession}
+            onOpenProfile={() => setShowProfile(true)}
+            onSignOut={handleSignOut}
+            onCloseSidebar={() => setShowSidebar(false)}
+          />
+        </div>
+      </div>
 
       <ChatArea
         messages={messages}
