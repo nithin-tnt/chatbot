@@ -4,8 +4,8 @@
   "installCommand": "npm install",
   "framework": "nextjs",
   "env": {
-    "GEMINI_API_KEY": {
-      "description": "Your Google Gemini API key",
+    "OPENROUTER_API_KEY": {
+      "description": "Your OpenRouter API key",
       "value": ""
     },
     "NEXT_PUBLIC_SUPABASE_URL": {
